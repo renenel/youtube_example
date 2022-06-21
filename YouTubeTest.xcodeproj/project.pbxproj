@@ -17,6 +17,12 @@
 		7706590D2861C05C007248ED /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770658E32861C05B007248ED /* ContentView.swift */; };
 		7706590E2861C05C007248ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 770658E42861C05C007248ED /* Assets.xcassets */; };
 		7706590F2861C05C007248ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 770658E42861C05C007248ED /* Assets.xcassets */; };
+		7706591F2861C074007248ED /* YouTubeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706591E2861C074007248ED /* YouTubeViewModel.swift */; };
+		770659202861C074007248ED /* YouTubeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706591E2861C074007248ED /* YouTubeViewModel.swift */; };
+		770659232861D44C007248ED /* YouTubeResultParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770659222861D44C007248ED /* YouTubeResultParser.swift */; };
+		770659242861D44C007248ED /* YouTubeResultParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770659222861D44C007248ED /* YouTubeResultParser.swift */; };
+		770659262861DEF6007248ED /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770659252861DEF6007248ED /* WebView.swift */; };
+		770659272861DEF6007248ED /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770659252861DEF6007248ED /* WebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,9 @@
 		770659022861C05C007248ED /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		770659062861C05C007248ED /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		770659082861C05C007248ED /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		7706591E2861C074007248ED /* YouTubeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeViewModel.swift; sourceTree = "<group>"; };
+		770659222861D44C007248ED /* YouTubeResultParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeResultParser.swift; sourceTree = "<group>"; };
+		770659252861DEF6007248ED /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +109,9 @@
 				770658E22861C05B007248ED /* YouTubeTestApp.swift */,
 				770658E32861C05B007248ED /* ContentView.swift */,
 				770658E42861C05C007248ED /* Assets.xcassets */,
+				7706591E2861C074007248ED /* YouTubeViewModel.swift */,
+				770659222861D44C007248ED /* YouTubeResultParser.swift */,
+				770659252861DEF6007248ED /* WebView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -300,7 +312,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7706590C2861C05C007248ED /* ContentView.swift in Sources */,
+				770659262861DEF6007248ED /* WebView.swift in Sources */,
+				770659232861D44C007248ED /* YouTubeResultParser.swift in Sources */,
 				7706590A2861C05C007248ED /* YouTubeTestApp.swift in Sources */,
+				7706591F2861C074007248ED /* YouTubeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +324,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7706590D2861C05C007248ED /* ContentView.swift in Sources */,
+				770659272861DEF6007248ED /* WebView.swift in Sources */,
+				770659242861D44C007248ED /* YouTubeResultParser.swift in Sources */,
 				7706590B2861C05C007248ED /* YouTubeTestApp.swift in Sources */,
+				770659202861C074007248ED /* YouTubeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
