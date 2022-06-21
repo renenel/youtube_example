@@ -22,17 +22,16 @@ class YouTubeResultsParserImpl: YouTubeResultParser {
       return .failure(.couldNotCastDataToString)
     }
     let range = NSRange(location: 0, length: string.utf16.count)
-    let regex = try? NSRegularExpression(pattern: "\"videoId\": \"(.*)\"")
+    let regex = try? NSRegularExpression(pattern: "\"videoId\":\"*\"")
     guard let matches = regex?.matches(in: string, options: [], range: range) else {
       return .failure(.matchingFailed)
     }
-    let ids: [String] = matches.compactMap {
-      let fullString = String(string[Range($0.range, in: string)!])
-      // should replace with regex given time:
-      return fullString
-        .replacingOccurrences(of: "\"videoId\": \"", with: "")
-        .replacingOccurrences(of: "\"", with: "")
+    let ids: [String] = matches.compactMap { match in
+      guard let range = Range(match.range(at: 0), in: string) else { return nil }
+      // TODO: should be a regular expression
+      return String(string[range.upperBound..<string.index(range.upperBound, offsetBy: 11)])
     }
+
     let uniqueIds = Set(ids)
     return .success(uniqueIds.compactMap { YouTubeItem(id: $0) })
   }
