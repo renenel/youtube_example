@@ -19,7 +19,7 @@ extension YouTubeItem {
 }
 
 protocol YouTubeViewModel {
-  func query(_ string: String) -> AnyPublisher<[YouTubeItem], YouTubeViewModelError>
+  func query(_ string: String, completion: @escaping (Result<[YouTubeItem], YouTubeViewModelError>) -> (Void))
 }
 
 enum YouTubeViewModelError: Error {
@@ -32,48 +32,43 @@ enum YouTubeViewModelError: Error {
 class YouTubeViewModelImpl: YouTubeViewModel {
   
   public static var shared: YouTubeViewModel = YouTubeViewModelImpl()
-  
   private var parser: YouTubeResultParser
-  private var session: URLSession
-  private var subject = CurrentValueSubject<[YouTubeItem], YouTubeViewModelError>([])
-  private static let queryUrlComponents = URLComponents(string: "https://www.youtube.com/results")!
-
-  init(urlSession: URLSession = .shared, parser: YouTubeResultParser = YouTubeResultsParserImpl()) {
-    session = urlSession
+  private var service: YouTubeService
+  private var cancellable: AnyCancellable?
+  private var debounceTimer: Timer?
+  private static let debounceInterval: TimeInterval = 1.0
+  
+  init(service: YouTubeService = YouTubeServiceImpl(urlSession: .shared),
+       parser: YouTubeResultParser = YouTubeResultsParserImpl()) {
     self.parser = parser
+    self.service = service
   }
   
-  func query(_ string: String) -> AnyPublisher<[YouTubeItem], YouTubeViewModelError> {
-    // TODO: throttle
-    
-    var components = Self.queryUrlComponents
-    components.queryItems = [URLQueryItem(name: "search_query", value: string)]
-    
-    guard let url = components.url else {
-      return Fail(error: YouTubeViewModelError.couldNotFormURL).eraseToAnyPublisher()
-    }
-
-    // Note: we may want to specify a queue via URL session configuration
-    let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-      guard let self = self else { return }
-      if let error = error {
-        self.subject.send(completion: .failure(.queryReturnedError(error)))
-        return
-      }
-      guard let data = data else {
-        self.subject.send(completion: .failure(.queryReturnedEmpty))
-        return
-      }
-      // Note: parsing may be better done off the URLSession queue
-      switch self.parser.parse(data) {
+  func query(_ string: String, completion: @escaping (Result<[YouTubeItem], YouTubeViewModelError>) -> (Void)) {
+    debounceTimer?.invalidate()
+    debounceTimer = Timer.scheduledTimer(
+      withTimeInterval: Self.debounceInterval,
+      repeats: false,
+      block: { [weak self] _ in
+        self?.applyQuery(string, completion: completion)
+      })
+  }
+  
+  func applyQuery(_ string: String, completion: @escaping (Result<[YouTubeItem], YouTubeViewModelError>) -> (Void)) {
+    cancellable = service.query(string).sink(receiveCompletion: {
+      switch $0 {
+      case .finished:
+        break
       case .failure(let error):
-        self.subject.send(completion: .failure(.queryResultCouldNotBeParsed(error)))
-      case .success(let results):
-        self.subject.send(results)
-        self.subject.send(completion: .finished)
+        completion(.failure(error))
       }
-    }
-    task.resume()
-    return subject.eraseToAnyPublisher()
+    }, receiveValue: {
+      switch self.parser.parse($0) {
+      case .failure(let error):
+        completion(.failure(.queryResultCouldNotBeParsed(error)))
+      case .success(let results):
+        completion(.success(results))
+      }
+    })
   }
 }

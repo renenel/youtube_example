@@ -13,7 +13,6 @@ struct ContentView: View {
   @State private var queryString: String = ""
   @State private var items: [YouTubeItem]?
   @State private var didFetch = false
-  static private var cancellable: AnyCancellable?
 
   var body: some View {
     VStack {
@@ -24,16 +23,15 @@ struct ContentView: View {
           guard isQueryStringValid else {
             return
           }
-          ContentView.cancellable = YouTubeViewModelImpl.shared.query($0).sink { result in
+          YouTubeViewModelImpl.shared.query($0) { result in
             self.didFetch = true
             switch result {
             case .failure(let error):
               print("Youtube query failed with \(error)")
-            case .finished:
-              print("Youtube query finished successfully")
+            case .success(let items):
+              self.items = items
+              print("Youtube query finished successfully: \(items)")
             }
-          } receiveValue: { items in
-            self.items = items
           }
         })).padding()
       if isQueryStringValid {
@@ -42,8 +40,7 @@ struct ContentView: View {
             Text("No results")
           } else {
             List(items, id:\.self) {
-              //Text("\($0.id)")
-              WebView(url: URL(string: $0.iFrameString)!).frame(maxHeight: 400)
+              WebView(htmlString: $0.iFrameString).frame(minHeight: 120)
             }
           }
         } else {

@@ -23,6 +23,8 @@
 		770659242861D44C007248ED /* YouTubeResultParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770659222861D44C007248ED /* YouTubeResultParser.swift */; };
 		770659262861DEF6007248ED /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770659252861DEF6007248ED /* WebView.swift */; };
 		770659272861DEF6007248ED /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770659252861DEF6007248ED /* WebView.swift */; };
+		77FA47CB28624D8B00E782D3 /* YouTubeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA47CA28624D8B00E782D3 /* YouTubeService.swift */; };
+		77FA47CC28624D8B00E782D3 /* YouTubeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA47CA28624D8B00E782D3 /* YouTubeService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,7 @@
 		7706591E2861C074007248ED /* YouTubeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeViewModel.swift; sourceTree = "<group>"; };
 		770659222861D44C007248ED /* YouTubeResultParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeResultParser.swift; sourceTree = "<group>"; };
 		770659252861DEF6007248ED /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		77FA47CA28624D8B00E782D3 /* YouTubeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,7 @@
 				7706591E2861C074007248ED /* YouTubeViewModel.swift */,
 				770659222861D44C007248ED /* YouTubeResultParser.swift */,
 				770659252861DEF6007248ED /* WebView.swift */,
+				77FA47CA28624D8B00E782D3 /* YouTubeService.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -314,6 +318,7 @@
 				7706590C2861C05C007248ED /* ContentView.swift in Sources */,
 				770659262861DEF6007248ED /* WebView.swift in Sources */,
 				770659232861D44C007248ED /* YouTubeResultParser.swift in Sources */,
+				77FA47CB28624D8B00E782D3 /* YouTubeService.swift in Sources */,
 				7706590A2861C05C007248ED /* YouTubeTestApp.swift in Sources */,
 				7706591F2861C074007248ED /* YouTubeViewModel.swift in Sources */,
 			);
@@ -326,6 +331,7 @@
 				7706590D2861C05C007248ED /* ContentView.swift in Sources */,
 				770659272861DEF6007248ED /* WebView.swift in Sources */,
 				770659242861D44C007248ED /* YouTubeResultParser.swift in Sources */,
+				77FA47CC28624D8B00E782D3 /* YouTubeService.swift in Sources */,
 				7706590B2861C05C007248ED /* YouTubeTestApp.swift in Sources */,
 				770659202861C074007248ED /* YouTubeViewModel.swift in Sources */,
 			);
